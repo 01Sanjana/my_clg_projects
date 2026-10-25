@@ -1,0 +1,22 @@
+
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+  background: #edf2f7;
+}
+
+.page-title {
+  text-align: center;
+  color: #17365d;
+  font-family: Arial, sans-serif;
+  margin: 10px 0 25px;
+}
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}

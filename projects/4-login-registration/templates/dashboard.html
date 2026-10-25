@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Successful - Admane Traders & Electrics</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #0d1b2a,
+                #1b4965
+            );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        /* =========================
+           SUCCESS BOX
+        ========================= */
+
+        .success-box {
+
+            background: white;
+
+            width: 450px;
+
+            padding: 50px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.3);
+
+            animation: appear 0.8s ease;
+
+        }
+
+
+        /* =========================
+           SUCCESS ICON
+        ========================= */
+
+        .success-icon {
+
+            font-size: 60px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================
+           HEADING
+        ========================= */
+
+        h1 {
+
+            color: #0d1b2a;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        p {
+
+            color: #666;
+
+            margin-bottom: 30px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================
+           LOGOUT BUTTON
+        ========================= */
+
+        .logout {
+
+            display: inline-block;
+
+            padding: 12px 30px;
+
+            background: #ffb703;
+
+            color: #0d1b2a;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+        }
+
+
+        .logout:hover {
+
+            background: #fb8500;
+
+            color: white;
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =========================
+           KEYFRAME ANIMATION
+        ========================= */
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="success-box">
+
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+
+        <h1>
+            Login Successful!
+        </h1>
+
+
+        <p>
+
+            Welcome,
+            <strong>{{ name }}</strong>!
+
+            <br>
+
+            You have successfully logged in to
+            Admane Traders & Electrics.
+
+        </p>
+
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>

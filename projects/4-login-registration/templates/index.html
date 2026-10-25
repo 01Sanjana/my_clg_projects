@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admane Traders & Electrics - Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Radio buttons for switching between Login and Register -->
+
+    <input type="radio" name="form" id="login" checked>
+
+    <input type="radio" name="form" id="register">
+
+
+    <div class="container">
+
+
+        <!-- =========================
+             COMPANY WELCOME SECTION
+        ========================== -->
+
+        <div class="welcome-section">
+
+            <div class="welcome-content">
+
+                <div class="logo">
+                    ⚡ Admane Traders & Electrics
+                </div>
+
+                <h1>Welcome!</h1>
+
+                <p>
+                    Your trusted destination for
+                    electrical, plumbing, hardware
+                    and tools.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORMS SECTION
+        ========================== -->
+
+        <div class="form-section">
+
+            {% if message %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- =========================
+                 LOGIN FORM
+            ========================== -->
+
+            <div class="form login-form">
+
+                <h2>Welcome Back!</h2>
+
+                <p class="subtitle">
+                    Login to continue shopping with us.
+                </p>
+
+
+                <form action="/login" method="POST">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-box">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your Gmail address"
+                            pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                            title="Please enter a valid Gmail address ending with @gmail.com"
+                            required>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-box">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="options">
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Remember me
+
+                        </label>
+
+
+                        <a href="#">
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button type="submit">
+                        Login
+                    </button>
+
+                </form>
+
+
+                <!-- SWITCH TO REGISTER -->
+
+                <p class="switch">
+
+                    Don't have an account?
+
+                    <label for="register">
+                        Register
+                    </label>
+
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 REGISTRATION FORM
+            ========================== -->
+
+            <div class="form register-form">
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Register with Admane Traders & Electrics.
+                </p>
+
+
+                <form action="/register" method="POST">
+
+
+                    <!-- NAME -->
+
+                    <div class="input-box">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-box">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your Gmail address"
+                            pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                            title="Please enter a valid Gmail address ending with @gmail.com"
+                            required>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-box">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create password"
+                            required>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="input-box">
+
+                        <label>Confirm Password</label>
+
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            placeholder="Confirm password"
+                            required>
+
+                    </div>
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button type="submit">
+                        Register
+                    </button>
+
+                </form>
+
+
+                <!-- SWITCH TO LOGIN -->
+
+                <p class="switch">
+
+                    Already have an account?
+
+                    <label for="login">
+                        Login
+                    </label>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,546 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #0d1b2a,
+        #1b4965
+    );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+/* =========================
+   HIDE RADIO BUTTONS
+========================= */
+
+input[type="radio"] {
+
+    display: none;
+
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+
+    width: 900px;
+
+    height: 550px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    position: relative;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.3);
+
+    animation: pageLoad 1s ease;
+
+}
+
+
+/* =========================
+   WELCOME SECTION
+========================= */
+
+.welcome-section {
+
+    width: 45%;
+
+    background: linear-gradient(
+        135deg,
+        #0d1b2a,
+        #1b4965
+    );
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px;
+
+    transition: 0.6s ease;
+
+}
+
+
+.welcome-content {
+
+    max-width: 320px;
+
+}
+
+
+/* COMPANY LOGO */
+
+.logo {
+
+    color: #ffb703;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 40px;
+
+}
+
+
+.welcome-content h1 {
+
+    font-size: 45px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.welcome-content p {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #eeeeee;
+
+}
+
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.form-section {
+
+    width: 55%;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================
+   COMMON FORM
+========================= */
+
+.form {
+
+    width: 100%;
+
+    padding: 55px;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    transition: 0.6s ease;
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-form {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-form {
+
+    opacity: 0;
+
+    transform: translateX(100%);
+
+}
+
+
+/* =========================
+   FORM HEADING
+========================= */
+
+.form h2 {
+
+    font-size: 36px;
+
+    color: #0d1b2a;
+
+    margin-bottom: 10px;
+
+}
+
+
+.subtitle {
+
+    color: #777;
+
+    margin-bottom: 30px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input-box {
+
+    margin-bottom: 18px;
+
+}
+
+
+.input-box label {
+
+    display: block;
+
+    color: #333;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+
+}
+
+
+/* =========================
+   INPUT FOCUS
+========================= */
+
+.input-box input:focus {
+
+    border-color: #1b4965;
+
+    box-shadow:
+        0 0 8px rgba(27, 73, 101, 0.25);
+
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.options a {
+
+    color: #1b4965;
+
+    text-decoration: none;
+
+}
+
+
+.options a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.form button {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #ffb703;
+
+    color: #0d1b2a;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+/* BUTTON HOVER */
+
+.form button:hover {
+
+    background: #fb8500;
+
+    color: white;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 15px rgba(251, 133, 0, 0.3);
+
+}
+
+
+/* =========================
+   SWITCH LOGIN / REGISTER
+========================= */
+
+.switch {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #777;
+
+}
+
+
+.switch label {
+
+    color: #1b4965;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.switch label:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================
+   REGISTER ANIMATION
+========================= */
+
+#register:checked
+~ .container
+.login-form {
+
+    opacity: 0;
+
+    transform: translateX(-100%);
+
+}
+
+
+#register:checked
+~ .container
+.register-form {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+}
+
+
+/* =========================
+   WELCOME PANEL CHANGE
+========================= */
+
+#register:checked
+~ .container
+.welcome-section {
+
+    background: linear-gradient(
+        135deg,
+        #1b4965,
+        #0d1b2a
+    );
+
+}
+
+
+/* =========================
+   KEYFRAME ANIMATION
+========================= */
+
+@keyframes pageLoad {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    padding: 12px;
+
+    margin: 15px 55px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+
+    .container {
+
+        width: 100%;
+
+        height: 600px;
+
+    }
+
+
+    .welcome-section {
+
+        display: none;
+
+    }
+
+
+    .form-section {
+
+        width: 100%;
+
+    }
+
+
+    .form {
+
+        padding: 40px 30px;
+
+    }
+
+
+    .form h2 {
+
+        font-size: 30px;
+
+    }
+
+}
