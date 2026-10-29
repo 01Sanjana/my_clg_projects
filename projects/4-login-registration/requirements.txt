@@ -1,0 +1,2 @@
+﻿Flask
+gunicorn

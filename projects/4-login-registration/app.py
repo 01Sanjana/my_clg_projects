@@ -1,34 +1,28 @@
-from flask import Flask, render_template, request, redirect, url_for, session
 
+import os
+import re
 import sqlite3
 
-import re
-
+from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
-
 
 # =========================
 # FLASK APPLICATION
 # =========================
 
 app = Flask(__name__)
-
-
-# Secret key for login sessions
-
-app.secret_key = "admane_traders_secret_key"
-
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "dev-only-change-this"
+)
 
 # =========================
 # DATABASE CONNECTION
 # =========================
 
 def get_db_connection():
-
     conn = sqlite3.connect("database.db")
-
     conn.row_factory = sqlite3.Row
-
     return conn
 
 
@@ -37,25 +31,18 @@ def get_db_connection():
 # =========================
 
 def create_table():
-
     conn = get_db_connection()
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
-
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-
             name TEXT NOT NULL,
-
             email TEXT UNIQUE NOT NULL,
-
             password TEXT NOT NULL
-
         )
     """)
 
     conn.commit()
-
     conn.close()
 
 
@@ -65,7 +52,6 @@ def create_table():
 
 @app.route("/")
 def home():
-
     message = session.pop("message", None)
 
     return render_template(
@@ -80,65 +66,36 @@ def home():
 
 @app.route("/register", methods=["POST"])
 def register():
-
-    name = request.form["name"]
-
-    email = request.form["email"]
-
+    name = request.form["name"].strip()
+    email = request.form["email"].strip()
     password = request.form["password"]
-
     confirm_password = request.form["confirm_password"]
 
-
-    # =========================
-    # CHECK GMAIL FORMAT
-    # =========================
-
+    # Validate Gmail address
     gmail_pattern = r"^[a-zA-Z0-9._%+-]+@gmail\.com$"
 
-
     if not re.match(gmail_pattern, email):
-
         return render_template(
             "index.html",
             message="Please enter a valid Gmail address."
         )
 
-
-    # =========================
-    # CHECK PASSWORDS
-    # =========================
-
+    # Check password confirmation
     if password != confirm_password:
-
         return render_template(
             "index.html",
             message="Passwords do not match."
         )
 
-
-    # =========================
-    # CONNECT TO DATABASE
-    # =========================
-
     conn = get_db_connection()
 
-
-    # =========================
-    # CHECK EXISTING EMAIL
-    # =========================
-
+    # Check whether email is already registered
     existing_user = conn.execute(
-
         "SELECT * FROM users WHERE email = ?",
-
         (email,)
-
     ).fetchone()
 
-
     if existing_user:
-
         conn.close()
 
         return render_template(
@@ -146,50 +103,34 @@ def register():
             message="This email is already registered."
         )
 
-
-    # =========================
-    # HASH PASSWORD
-    # =========================
-
+    # Hash password before storing it
     hashed_password = generate_password_hash(password)
 
+    try:
+        conn.execute(
+            """
+            INSERT INTO users (name, email, password)
+            VALUES (?, ?, ?)
+            """,
+            (name, email, hashed_password)
+        )
 
-    # =========================
-    # INSERT USER
-    # =========================
+        conn.commit()
 
-    conn.execute(
+    except sqlite3.IntegrityError:
+        conn.close()
 
-        """
-        INSERT INTO users (name, email, password)
-        VALUES (?, ?, ?)
-        """,
-
-        (name, email, hashed_password)
-
-    )
-
-
-    # Save changes
-
-    conn.commit()
-
-
-    # Close database
+        return render_template(
+            "index.html",
+            message="This email is already registered."
+        )
 
     conn.close()
 
-
-    # =========================
-    # SUCCESS MESSAGE
-    # =========================
-
+    # Show success message after registration
     session["message"] = "Registration successful! Please login."
 
-
-    return redirect(
-        url_for("home")
-    )
+    return redirect(url_for("home"))
 
 
 # =========================
@@ -198,62 +139,30 @@ def register():
 
 @app.route("/login", methods=["POST"])
 def login():
-
-    email = request.form["email"]
-
+    email = request.form["email"].strip()
     password = request.form["password"]
-
-
-    # Connect to database
 
     conn = get_db_connection()
 
-
-    # Search for user
-
     user = conn.execute(
-
         "SELECT * FROM users WHERE email = ?",
-
         (email,)
-
     ).fetchone()
-
 
     conn.close()
 
-
-    # =========================
-    # CHECK LOGIN DETAILS
-    # =========================
-
+    # Verify email and password
     if user and check_password_hash(
         user["password"],
         password
     ):
-
-        # Store user name in session
-
         session["user_name"] = user["name"]
 
-
-        # Open dashboard
-
-        return redirect(
-            url_for("dashboard")
-        )
-
-
-    # =========================
-    # INVALID LOGIN
-    # =========================
+        return redirect(url_for("dashboard"))
 
     return render_template(
-
         "index.html",
-
         message="Invalid email or password."
-
     )
 
 
@@ -263,23 +172,12 @@ def login():
 
 @app.route("/dashboard")
 def dashboard():
-
-
-    # Check whether user is logged in
-
     if "user_name" not in session:
-
-        return redirect(
-            url_for("home")
-        )
-
+        return redirect(url_for("home"))
 
     return render_template(
-
         "dashboard.html",
-
         name=session["user_name"]
-
     )
 
 
@@ -289,31 +187,20 @@ def dashboard():
 
 @app.route("/logout")
 def logout():
-
-
-    # Remove session data
-
     session.clear()
-
-
-    # Return to login page
-
-    return redirect(
-        url_for("home")
-    )
+    return redirect(url_for("home"))
 
 
 # =========================
-# START APPLICATION
+# CREATE TABLE ON STARTUP
+# =========================
+
+create_table()
+
+
+# =========================
+# START APPLICATION LOCALLY
 # =========================
 
 if __name__ == "__main__":
-
-    # Create database table
-
-    create_table()
-
-
-    # Start Flask server
-
     app.run(debug=True)
